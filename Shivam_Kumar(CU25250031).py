@@ -40,4 +40,4 @@ while front <= rear:
 
     front += 1
 
-print("Array cleared successfully.")
+print("Array cleared successfully.") 
