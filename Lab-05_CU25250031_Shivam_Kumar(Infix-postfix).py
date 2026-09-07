@@ -69,47 +69,134 @@ print("Postfix Expression:", result)
 
 # 2.Postfix Expression
 
-class IntegerStack:
+class Stack:
     def __init__(self):
         self.stack = []
 
-    def push(self, item):
-        self.stack.append(item)
+    def push(self, x):
+        self.stack.append(x)
 
     def pop(self):
         return self.stack.pop()
 
-    def is_empty(self):
-        return len(self.stack) == 0
 
+def evaluate(expression):
+    s = Stack()
 
-def evaluate_postfix(expression):
-    stack = IntegerStack()
+    for ch in expression:
+        if ch.isdigit():
+            s.push(int(ch))
+        else:
+            b = s.pop()
+            a = s.pop()
 
-    for char in expression:
-        if char.isdigit():
-            stack.push(int(char))
+            if ch == '+':
+                s.push(a + b)
+            elif ch == '-':
+                s.push(a - b)
+            elif ch == '*':
+                s.push(a * b)
+            elif ch == '/':
+                s.push(a // b)
 
-        elif char in '+-*/':
-            operand2 = stack.pop()
-            operand1 = stack.pop()
+    return s.pop()
 
-            if char == '+':
-                result = operand1 + operand2
-            elif char == '-':
-                result = operand1 - operand2
-            elif char == '*':
-                result = operand1 * operand2
-            elif char == '/':
-                result = operand1 / operand2
-
-            stack.push(result)
-
-    return stack.pop()
 
 expression = input("Enter postfix expression: ")
+print("Result:", evaluate(expression))
 
-result = evaluate_postfix(expression)
+3. Implement a binary
+# search tree with insertion, deletion, and traversal operations (inorder,
+# preorder, postorder). 
 
-print("Postfix Expression:", expression)
-print("Final Result:", result)
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+
+def insert(root, data):
+    if root is None:
+        return Node(data)
+
+    if data < root.data:
+        root.left = insert(root.left, data)
+    else:
+        root.right = insert(root.right, data)
+
+    return root
+
+
+def minimum(root):
+    while root.left:
+        root = root.left
+    return root
+
+
+def delete(root, data):
+    if root is None:
+        return root
+
+    if data < root.data:
+        root.left = delete(root.left, data)
+
+    elif data > root.data:
+        root.right = delete(root.right, data)
+
+    else:
+        if root.left is None:
+            return root.right
+
+        if root.right is None:
+            return root.left
+
+        temp = minimum(root.right)
+        root.data = temp.data
+        root.right = delete(root.right, temp.data)
+
+    return root
+
+
+def inorder(root):
+    if root:
+        inorder(root.left)
+        print(root.data, end=" ")
+        inorder(root.right)
+
+
+def preorder(root):
+    if root:
+        print(root.data, end=" ")
+        preorder(root.left)
+        preorder(root.right)
+
+
+def postorder(root):
+    if root:
+        postorder(root.left)
+        postorder(root.right)
+        print(root.data, end=" ")
+
+
+root = None
+
+values = [28, 30, 69, 26, 47, 61, 84]
+
+for value in values:
+    root = insert(root, value)
+
+print("Inorder:", end=" ")
+inorder(root)
+
+print("\nPreorder:", end=" ")
+preorder(root)
+
+print("\nPostorder:", end=" ")
+postorder(root)
+
+root = delete(root, 30)
+
+print("\n\nAfter deleting 30:")
+print("Inorder:", end=" ")
+inorder(root)
