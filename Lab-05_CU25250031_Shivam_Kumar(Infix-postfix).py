@@ -1,7 +1,5 @@
 # 1. Infix to Postfix Conversion
 
-from django.db.models import Expression
-
 
 class OperatorStack:
     def __init__(self):
