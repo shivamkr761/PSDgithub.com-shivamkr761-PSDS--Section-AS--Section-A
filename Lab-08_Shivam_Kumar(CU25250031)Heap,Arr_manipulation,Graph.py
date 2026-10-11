@@ -1,41 +1,41 @@
-# Q 1: Maximum Sum of a Subarray of Size K
+# # Q 1: Maximum Sum of a Subarray of Size K
 
-n = int(input("Enter the size of the array: "))
-k = int(input("Enter the size of the subarray: "))
-a = list(map(int, input("Enter the elements of the array: ").split()))
+# n = int(input("Enter the size of the array: "))
+# k = int(input("Enter the size of the subarray: "))
+# a = list(map(int, input("Enter the elements of the array: ").split()))
 
-window = sum(a[:k])
-maximum = window
-for i in range(k, n):
-    window += a[i]
-    window -= a[i - k]
+# window = sum(a[:k])
+# maximum = window
+# for i in range(k, n):
+#     window += a[i]
+#     window -= a[i - k]
 
-    if window > maximum:
-        maximum = window
+#     if window > maximum:
+#         maximum = window
 
-print("Maximum sum of a subarray of size", k, "is:", maximum)
+# print("Maximum sum of a subarray of size", k, "is:", maximum)
 
-# Q 2: Given a string S, find the length of the longest substring without repeating characters.
+# # Q 2: Given a string S, find the length of the longest substring without repeating characters.
 
-s = str(input("Enter the string: ").strip())
+# s = str(input("Enter the string: ").strip())
 
-seen = set()
-left = 0
-answer = 0
+# seen = set()
+# left = 0
+# answer = 0
 
-for right in range(len(s)):
-    while s[right] in seen:
-        seen.remove(s[left])
-        left += 1
+# for right in range(len(s)):
+#     while s[right] in seen:
+#         seen.remove(s[left])
+#         left += 1
 
-    seen.add(s[right])
+#     seen.add(s[right])
 
-    length = right - left + 1
+#     length = right - left + 1
 
-    if length > answer:
-        answer = length
+#     if length > answer:
+#         answer = length
 
-print("Length of the longest substring without repeating characters is:", answer)
+# print("Length of the longest substring without repeating characters is:", answer)
 
 # Q.3: You are given a weighted, undirected graph with N nodes and M edges. Find the shortest 
 #      path from node 1 to node N such that the path uses at most K edges. If no such path exists, output -1.

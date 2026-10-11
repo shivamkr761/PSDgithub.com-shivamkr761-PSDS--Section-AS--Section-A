@@ -33,23 +33,4 @@ def solve():
 
     return answer
 
-
-n = int(input())
-nums = list(map(int, input().split()))
-
-count = {}
-
-for x in nums:
-    s = digit_sum(x)
-
-    if s in count:
-        count[s] += 1
-    else:
-        count[s] = 1
-
-answer = 0
-
-for value in count.values():
-    answer += value * value
-
-print(answer)
+print(solve())
